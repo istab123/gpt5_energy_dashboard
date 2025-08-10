@@ -308,6 +308,16 @@ function FlowParticles({ from, to, power, color }) {
   );
 }
 
+function EnergyNode({ Icon, label, color }) {
+  const IconComp = Icon;
+  return (
+    <div className="flex flex-col items-center text-xs gap-1">
+      {IconComp ? React.createElement(IconComp, { className: "w-6 h-6", style: { color } }) : null}
+      <span>{label}</span>
+    </div>
+  );
+}
+
 function FlowNode({ title, Icon, value, unit, accent, suffix }) {
   const positive = value >= 0;
   const IconComp = Icon; // React component type
@@ -498,21 +508,20 @@ export default function EnergyDashboard() {
                 {/* animierte Pfeile */}
                 <div className={`relative min-h-[280px] rounded-xl ${dark ? "bg-zinc-950/60 border-zinc-800" : "bg-zinc-100 border-zinc-300"} border overflow-hidden p-4`}>
                   <div className="absolute inset-0" style={{ background: dark ? "radial-gradient(circle at 50% 0%, rgba(255,255,255,0.06), transparent 60%)" : "radial-gradient(circle at 50% 0%, rgba(0,0,0,0.06), transparent 60%)" }} />
-                  <div className="grid grid-rows-4 h-full">
-                    <div className="flex items-center justify-center gap-2">
-                      <Badge>PV</Badge>
+                  <div className="grid grid-rows-4 h-full text-center">
+                    <div className="flex items-center justify-center">
+                      <EnergyNode Icon={Sun} label="PV" color={COLORS.pv} />
                     </div>
-                    <div className="flex items-center justify-center gap-6">
-                      <Badge>Haus</Badge>
-                      <Badge>💡</Badge>
+                    <div className="flex items-center justify-center">
+                      <EnergyNode Icon={Home} label="Haus" color={COLORS.load} />
                     </div>
-                    <div className="flex items-center justify-center gap-4">
-                      <Badge>Wärmepumpe</Badge>
-                      <Badge>E‑Auto</Badge>
+                    <div className="flex items-center justify-center gap-12">
+                      <EnergyNode Icon={Thermometer} label="Wärmepumpe" color={COLORS.hp} />
+                      <EnergyNode Icon={Car} label="E‑Auto" color={COLORS.ev} />
                     </div>
-                    <div className="flex items-center justify-center gap-4">
-                      <Badge>Batterie</Badge>
-                      <Badge>Netz</Badge>
+                    <div className="flex items-center justify-center gap-12">
+                      <EnergyNode Icon={Battery} label="Batterie" color={COLORS.battery} />
+                      <EnergyNode Icon={PlugZap} label="Netz" color={COLORS.gridPos} />
                     </div>
                   </div>
 
