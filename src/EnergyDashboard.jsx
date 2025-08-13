@@ -104,9 +104,9 @@ export default function EnergyDashboard() {
 
   return (
     <div className={`min-h-screen ${dark ? "bg-zinc-900 text-zinc-100" : "bg-white text-zinc-900"} transition-colors`}>
-      <div className="max-w-6xl mx-auto p-4 space-y-4">
-        <div className="flex justify-between items-center">
-          <h1 className="text-2xl font-bold flex items-center gap-2">
+      <div className="max-w-6xl mx-auto p-2 md:p-4 space-y-4">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+          <h1 className="text-xl sm:text-2xl font-bold flex items-center gap-2">
             <Zap className="w-6 h-6 text-amber-500" />
             Smart Energy Dashboard
           </h1>
@@ -120,7 +120,7 @@ export default function EnergyDashboard() {
         </div>
 
         {!useDemo && (
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
             <Input value={wsUrl} onChange={(e) => setWsUrl(e.target.value)} className="flex-1" />
             <Button onClick={() => { wsRef.current?.close(); setUseDemo(true); }} variant="outline">
               Disconnect
@@ -128,7 +128,7 @@ export default function EnergyDashboard() {
           </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
           {kpis.map((k) => (
             <Card key={k.title} className="bg-zinc-800/40 border-zinc-700">
               <CardHeader className="flex justify-between items-center">
@@ -136,7 +136,7 @@ export default function EnergyDashboard() {
                 {k.icon && React.createElement(k.icon, { className: "w-4 h-4", style: { color: k.accent } })}
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{k.value}</div>
+                <div className="text-xl md:text-2xl font-bold">{k.value}</div>
                 <div className="text-xs opacity-80 mt-1">{k.sub}</div>
               </CardContent>
             </Card>
@@ -149,11 +149,11 @@ export default function EnergyDashboard() {
             <Badge>{netDirection}</Badge>
           </CardHeader>
           <CardContent>
-            <div className="relative h-80">
+            <div className="relative h-64 md:h-80">
               {flowValue.map((a, idx) => (
                 <FlowParticles key={`${a.from}-${a.to}-${idx}`} from={a.from} to={a.to} power={a.power} color={colorFromSource(a.from)} />
               ))}
-              <div className="absolute inset-0 grid grid-cols-2 grid-rows-3 gap-4 p-4">
+              <div className="absolute inset-0 grid grid-cols-2 grid-rows-3 gap-2 p-2 sm:gap-4 sm:p-4">
                 <FlowNode title="PV" Icon={Sun} value={point.pv} unit="kW" accent={COLORS.pv} suffix="Quelle" />
                 <FlowNode title="Batterie" Icon={Battery} value={point.batteryPower} unit="kW" accent={COLORS.battery} suffix={point.batteryPower >= 0 ? "laden" : "entladen"} />
                 <FlowNode title="Netz" Icon={PlugZap} value={point.grid} unit="kW" accent={point.grid >= 0 ? COLORS.gridPos : COLORS.gridNeg} suffix={point.grid >= 0 ? "Bezug" : "Einspeisung"} />
@@ -174,7 +174,7 @@ export default function EnergyDashboard() {
             </div>
           </CardHeader>
           <CardContent>
-            <ResponsiveContainer width="100%" height={240}>
+            <ResponsiveContainer width="100%" height={200}>
               <AreaChart data={series}>
                 <defs>
                   <linearGradient id="pv" x1="0" y1="0" x2="0" y2="1">
@@ -202,7 +202,7 @@ export default function EnergyDashboard() {
             <CardTitle>Details</CardTitle>
           </CardHeader>
           <CardContent>
-            <ResponsiveContainer width="100%" height={240}>
+            <ResponsiveContainer width="100%" height={200}>
               <LineChart data={series}>
                 <CartesianGrid strokeDasharray="3 3" className={dark ? "stroke-zinc-700" : "stroke-zinc-200"} />
                 <XAxis dataKey="time" domain={["dataMin", "dataMax"]} tickFormatter={(t) => new Date(t).toLocaleTimeString()} type="number" className="text-xs" />

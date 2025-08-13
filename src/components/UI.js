@@ -5,7 +5,7 @@ export function Card({ className = "", children }) {
 }
 
 export function CardHeader({ children, className = "" }) {
-  return <div className={`px-4 pt-4 ${className}`}>{children}</div>;
+  return <div className={`px-3 pt-3 md:px-4 md:pt-4 ${className}`}>{children}</div>;
 }
 
 export function CardTitle({ children, className = "" }) {
@@ -13,11 +13,11 @@ export function CardTitle({ children, className = "" }) {
 }
 
 export function CardContent({ children, className = "" }) {
-  return <div className={`px-4 pb-4 ${className}`}>{children}</div>;
+  return <div className={`px-3 pb-3 md:px-4 md:pb-4 ${className}`}>{children}</div>;
 }
 
 export function Button({ children, onClick, variant = "default", className = "" }) {
-  const base = "inline-flex items-center gap-2 px-3 h-10 rounded-xl text-sm font-medium transition-colors";
+  const base = "inline-flex items-center gap-2 px-3 h-9 md:h-10 rounded-xl text-sm font-medium transition-colors";
   const styles =
     variant === "secondary"
       ? "bg-zinc-800 text-zinc-100 hover:bg-zinc-700 border border-zinc-700"
@@ -37,7 +37,7 @@ export function Input({ value, onChange, placeholder = "", className = "" }) {
       value={value}
       onChange={onChange}
       placeholder={placeholder}
-      className={`h-10 w-full rounded-xl px-3 outline-none border ${className}`}
+      className={`h-9 md:h-10 w-full rounded-xl px-3 outline-none border ${className}`}
     />
   );
 }

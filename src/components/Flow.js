@@ -43,8 +43,8 @@ export function FlowNode({ title, Icon, value, unit, accent, suffix }) {
         </div>
         <span className="text-xs" style={{ color: positive ? accent : COLORS.gridPos }}>{positive ? "+" : "-"}</span>
       </div>
-      <div className="mt-2 rounded-lg p-3" style={{ background: `${accent}22` }}>
-        <div className="text-2xl font-bold">
+      <div className="mt-2 rounded-lg p-2 sm:p-3" style={{ background: `${accent}22` }}>
+        <div className="text-xl sm:text-2xl font-bold">
           {Math.abs(value).toFixed(2)} <span className="text-sm font-medium opacity-80">{unit}</span>
         </div>
         {suffix && <div className="text-xs opacity-80 mt-1">{suffix}</div>}
